@@ -5,6 +5,19 @@ using namespace std;
 
 constexpr int MAX_SIZE=40;
 
+bool isStringEqual(const char* text1, const char* text2) {
+    while (*text1 || *text2) {
+        if (*text1==*text2) {
+            text1++;
+            text2++;
+        }
+        else {
+            return false;
+        }
+    }
+    return true;
+}
+
 void registerNewUser() {
     char username[MAX_SIZE];
     char password[MAX_SIZE];
