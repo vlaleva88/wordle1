@@ -54,3 +54,42 @@ void registerNewUser() {
 
     cout<<"Registered new user"<<endl;
 }
+
+
+void loginUser() {
+    char username[MAX_SIZE];
+    char password[MAX_SIZE];
+    cout<<"Username: ";
+    cin.getline(username,MAX_SIZE);
+    cout<<"Password: ";
+    cin.getline(password,MAX_SIZE);
+
+    bool found=false;
+
+    ifstream file("users.txt");
+    if (!file.is_open()) {
+        cout<<"File could not be opened"<<endl;
+        return;
+    }
+
+    char fullData[2*MAX_SIZE+1];
+    myStrcpy(username, password, fullData);
+
+    constexpr int MAX_SiZE_FILE=2*MAX_SIZE+2;
+    char lineInFile[MAX_SiZE_FILE];
+    while (file.getline(lineInFile,MAX_SiZE_FILE-1)) {
+        if (isStringEqual(lineInFile,fullData)) {
+            found=true;
+            break;
+        }
+    }
+    file.close();
+
+    // can make check for wrong username or wrong password
+    if (found) {
+        cout<<"Successfully logged in"<<endl;
+    }
+    else {
+        cout<<"Wrong username or password"<<endl;
+    }
+}
