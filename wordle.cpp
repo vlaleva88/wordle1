@@ -18,6 +18,24 @@ bool isStringEqual(const char* text1, const char* text2) {
     return true;
 }
 
+void myStrcpy(const char* text1, const char* text2, char* result) {
+    while (*text1) {
+        *result=*text1;
+        result++;
+        text1++;
+    }
+
+    *result=' ';
+    result++;
+
+    while (*text2) {
+        *result=*text2;
+        result++;
+        text2++;
+    }
+    *result='\0';
+}
+
 void registerNewUser() {
     char username[MAX_SIZE];
     char password[MAX_SIZE];
