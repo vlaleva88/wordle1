@@ -40,6 +40,9 @@ void myStrcpy(const char* text1, const char* text2, char* result) {
 void registerNewUser() {
     char username[MAX_SIZE];
     char password[MAX_SIZE];
+
+    cin.ignore();
+
     cout<<"Enter username: ";
     cin.getline(username,MAX_SIZE);
     cout<<"Enter password: ";
