@@ -96,7 +96,7 @@ void loginUser() {
 }
 
 int wordCounterInFile() {
-    ifstream file("wordsTest.txt");
+    ifstream file("words.txt");
     if (!file.is_open()) {
         cout<<"File could not be opened"<<endl;
         return -1;
@@ -119,7 +119,7 @@ int wordCounterInFile() {
 char* getWordFromLine(const int line) {
 
     // TODO free
-    ifstream file("wordsTest.txt");
+    ifstream file("words.txt");
     if (!file.is_open()) {
         cout<<"File could not be opened"<<endl;
         return nullptr;
