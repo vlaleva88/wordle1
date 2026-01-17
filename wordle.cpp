@@ -116,6 +116,30 @@ int wordCounterInFile() {
     return count;
 }
 
+char* getWordFromLine(const int line) {
+
+    // TODO free
+    ifstream file("wordsTest.txt");
+    if (!file.is_open()) {
+        cout<<"File could not be opened"<<endl;
+        return nullptr;
+    }
+
+    char* wordInFile=new char[MAX_SIZE_WORD+1];
+
+    int count=1;
+    while (file.getline(wordInFile,MAX_SIZE_WORD+1)) {
+        if (count==line) {
+            file.close();
+            return wordInFile;
+        }
+        count++;
+    }
+    file.close();
+
+    return nullptr;
+}
+
 void trueGame() {
 
 }
