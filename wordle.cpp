@@ -140,6 +140,16 @@ char* getWordFromLine(const int line) {
     return nullptr;
 }
 
+bool isInWord(const char* Word,const char symbol) {
+    while (*Word) {
+        if (*Word==symbol) {
+            return true;
+        }
+        Word++;
+    }
+    return false;
+}
+
 void trueGame() {
 
 }
