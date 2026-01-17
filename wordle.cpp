@@ -4,6 +4,7 @@
 using namespace std;
 
 constexpr int MAX_SIZE=40;
+constexpr int MAX_SIZE_WORD=40;
 
 bool isStringEqual(const char* text1, const char* text2) {
     while (*text1 || *text2) {
@@ -92,4 +93,29 @@ void loginUser() {
     else {
         cout<<"Wrong username or password"<<endl;
     }
+}
+
+int wordCounterInFile() {
+    ifstream file("wordsTest.txt");
+    if (!file.is_open()) {
+        cout<<"File could not be opened"<<endl;
+        return -1;
+    }
+
+
+    char* wordInFile=new char[MAX_SIZE_WORD+1];
+    int count=0;
+
+    while (file.getline(wordInFile,MAX_SIZE_WORD+1)) {
+        count++;
+        // cout<<wordInFile<<endl;
+    }
+    file.close();
+    delete[] wordInFile;
+
+    return count;
+}
+
+void trueGame() {
+
 }
