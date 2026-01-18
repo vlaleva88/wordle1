@@ -1,19 +1,3 @@
-/**
-*
-* Solution to course project #9
-* Introduction to programming course
-* Faculty of Mathematics and Informatics of Sofia University
-* Winter semester 2025/2026
-*
-* @author Vanina Laleva
-* @idnumber 3MI0600650
-* @compiler CLion
-*
-* software that resembles the popular puzzle game Wordle
-*
-*/
-
-
 #include<iostream>
 #include <fstream>
 
