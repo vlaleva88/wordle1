@@ -662,36 +662,7 @@ int main() {
     char username[MAX_SIZE];
     char password[MAX_SIZE];
 
-    while (choice!= 1 && choice!=2 && choice!=3) {
-        cin>>choice;
-
-        cin.ignore();
-
-        switch (choice) {
-            case 1: {
-                bool found=false;
-                while (!found) {
-                    cout<<"Username: ";
-                    cin.getline(username,MAX_SIZE);
-                    cout<<"Password: ";
-                    cin.getline(password,MAX_SIZE);
-                    loginUser(username,password,found);
-                } break;
-            }
-            case 2: {
-                cout<<"Username: ";
-                cin.getline(username,MAX_SIZE);
-                cout<<"Password: ";
-                cin.getline(password,MAX_SIZE);
-                registerNewUser(username, password);
-                break;
-            }
-            case 3:
-                exit(0);
-            default:
-                cout<<"\033[91m"<<"Wrong choice. Please enter current choice!"<<"\033[0m"<<endl;
-        }
-    }
+    selectAction(username,password);
 
     cout<<endl;
     cout<<"\033[95m"<<"Let's the game start"<<"\033[0m"<<endl;
