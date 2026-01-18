@@ -255,9 +255,12 @@ bool isInLeaderboard(const char* username) {
 
     char fullData[2*MAX_SIZE+1];
 
-    while (file.getline(name,SIZE_USERNAME+1)) {
-        if (isStringEqual(name, username)) {
-            delete[] name;
+    while (file.getline(fullData,2*MAX_SIZE+1)) {
+        char* usernameInFile=getUsername(fullData);
+        if (isStringEqual(usernameInFile, username)) {
+            cout<<usernameInFile<<endl;
+            file.close();
+            delete[] usernameInFile;
             return true;
         }
     }
