@@ -453,7 +453,16 @@ void selectAction(char* username, char* password) {
                 cin.getline(username,MAX_SIZE);
                 cout<<"Password: ";
                 cin.getline(password,MAX_SIZE);
-                registerNewUser(username, password);
+
+                char role[MAX_SIZE];
+                cin.getline(role,MAX_SIZE);
+
+                if (isStringEqual(role,"player")) {
+                    registerNewUser(username, password);
+                }
+                if (isStringEqual(role,"admin")) {
+                    registerNewAdmin(username, password);
+                }
                 break;
             }
             case 3:
