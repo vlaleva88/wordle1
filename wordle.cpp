@@ -417,6 +417,58 @@ void registerNewAdmin(const char* username, const char* password) {
     cout<<"\033[92m"<<"Admin registered"<<"\033[0m"<<endl;
 }
 
+bool isInAdminList(const char* username) {
+    ifstream file("admins.txt");
+
+    if (!file.is_open()) {
+        cout<<"File could not be opened"<<endl;
+        return false;
+    }
+
+    char line[2*MAX_SIZE+1];
+    while (file.getline(line,2*MAX_SIZE+1)) {
+        char* name=getUsername(line);
+        if (isStringEqual(name,username)) {
+            file.close();
+            delete[] name;
+            return true;
+        }
+        delete[] name;
+    }
+    file.close();
+    return false;
+}
+
+void loginAdmin(const char* username, const char* password, bool& found) {
+    ifstream file("admins.txt");
+
+    if (!file.is_open()) {
+        cout<<"File could not be opened"<<endl;
+        return;
+    }
+
+    char fullData[2*MAX_SIZE+1];
+    myStrcpy(username, password, fullData);
+
+    constexpr int MAX_SiZE_FILE=2*MAX_SIZE+2;
+    char lineInFile[MAX_SiZE_FILE];
+    while (file.getline(lineInFile,MAX_SiZE_FILE-1)) {
+        if (isStringEqual(lineInFile,fullData)) {
+            found=true;
+            break;
+        }
+    }
+    file.close();
+
+    // can make check for wrong username or wrong password
+    if (found) {
+        cout<<"\033[92m"<<"Successfully logged in"<<"\033[0m"<<endl;
+    }
+    else {
+        cout<<"\033[91m"<<"Wrong username or password. Try again!"<<"\033[0m"<<endl;
+    }
+}
+
 void selectAction(char* username, char* password) {
 
 
