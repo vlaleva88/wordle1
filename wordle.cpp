@@ -90,11 +90,11 @@ void loginUser(const char* username, const char* password, bool& found) {
 
     // can make check for wrong username or wrong password
     if (found) {
-        cout<<"Successfully logged in"<<endl;
+        cout<<"\033[92m"<<"Successfully logged in"<<"\033[0m"<<endl;
         cout<<"Welcome back, "<<username<<endl;
     }
     else {
-        cout<<"Wrong username or password. Try again!"<<endl;
+        cout<<"\033[91m"<<"Wrong username or password. Try again!"<<"\033[0m"<<endl;
     }
 }
 
@@ -247,10 +247,9 @@ int main() {
             case 3:
                 exit(0);
             default:
-                cout<<"Wrong choice. Please enter current choice!"<<endl;
+                cout<<"\033[91m"<<"Wrong choice. Please enter current choice!"<<"\033[0m"<<endl;
         }
     }
-
 
 
 
