@@ -227,6 +227,38 @@ void trueGame() {
     delete[] searchWord;
 }
 
+bool isInLeaderboard(const char* username) {
+    ifstream file("leaderboard.txt");
+
+    if (!file.is_open()) {
+        cout<<"File could not be opened"<<endl;
+        return false;
+    }
+
+    const int SIZE_USERNAME=sizeOfWord(username);
+    char* name=new char[SIZE_USERNAME+1];
+
+    while (file.getline(name,SIZE_USERNAME+1)) {
+        if (isStringEqual(name, username)) {
+            delete[] name;
+            return true;
+        }
+    }
+    delete[] name;
+    return false;
+}
+
+void leaderboard(const char* username, const int playedGame, const int wins) {
+    ofstream file("leaderboard.txt");
+
+    if (!file) {
+        cout<<"File could not be opened"<<endl;
+        return;
+    }
+
+
+}
+
 int main() {
     cout<<"Welcome! Please choice: "<<endl;
     cout<<"1. Login"<<endl;
