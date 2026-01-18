@@ -253,8 +253,7 @@ bool isInLeaderboard(const char* username) {
         return false;
     }
 
-    const int SIZE_USERNAME=sizeOfWord(username);
-    char* name=new char[SIZE_USERNAME+1];
+    char fullData[2*MAX_SIZE+1];
 
     while (file.getline(name,SIZE_USERNAME+1)) {
         if (isStringEqual(name, username)) {
