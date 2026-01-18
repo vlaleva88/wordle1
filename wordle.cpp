@@ -552,7 +552,7 @@ void playerGameplay(const char* username, const char* password) {
     else {
         games++;
     }
-    leaderboardUpdate(username, wins, games);
+    leaderboardUpdate(username, games, wins);
     cout<<"You stats: "<<wins<<"/"<<games<<endl;
 }
 
