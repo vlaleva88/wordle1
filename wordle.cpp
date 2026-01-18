@@ -264,7 +264,7 @@ bool isInLeaderboard(const char* username) {
             return true;
         }
     }
-    delete[] name;
+    file.close();
     return false;
 }
 
