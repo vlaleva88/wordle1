@@ -91,9 +91,6 @@ void loginUser(const char* username, const char* password, bool& found) {
         cout<<"\033[92m"<<"Successfully logged in"<<"\033[0m"<<endl;
         cout<<"Welcome back, "<<username<<endl;
     }
-    else {
-        cout<<"\033[91m"<<"Wrong username or password. Try again!"<<"\033[0m"<<endl;
-    }
 }
 
 int wordCounterInFile() {
@@ -243,6 +240,7 @@ void trueGame(bool& winGame) {
         cout<<"No more times! The word is: "<<searchWord<<endl;
     }
     else {
+        winGame=true;
         cout<<"Congratulations! You win!"<<endl;
     }
 
@@ -491,11 +489,13 @@ void selectAction(char* username, char* password) {
                 cin.getline(username,MAX_SIZE);
                 cout<<"Password: ";
                 cin.getline(password,MAX_SIZE);
+
                 loginUser(username,password,login);
+                if (!login) {
+                    loginAdmin(username,password,logInAdmin);
+                }
 
-                loginAdmin(username,password,logInAdmin);
-
-                if (!login && !logInAdmin) {
+                if (login==false && logInAdmin==false) {
                     cout<<"\033[91m"<<"Wrong username or password. Try again!"<<"\033[0m"<<endl;
                 }
 
@@ -653,11 +653,6 @@ void adminGameplay(const char* username, const char* password) {
 int main() {
     cout<<"\033[95m"<<"Welcome to the Wordle! Please choice: "<<"\033[0m"<<endl;
     cout<<"-------------------------------------"<<endl;
-    cout<<"1. Login"<<endl;
-    cout<<"2. Register User"<<endl;
-    cout<<"3. Exit"<<endl;
-    int choice=0;
-    cout<<"Enter your choice: ";
 
     char username[MAX_SIZE];
     char password[MAX_SIZE];
@@ -665,23 +660,13 @@ int main() {
     selectAction(username,password);
 
     cout<<endl;
-    cout<<"\033[95m"<<"Let's the game start"<<"\033[0m"<<endl;
-
-    bool flag=false;
-    trueGame(flag);
 
     if (isInAdminList(username)) {
         adminGameplay(username,password);
     }
-
-    if (flag) {
-        wins++;
-        games++;
-    }
     else {
         playerGameplay(username,password);
     }
-    leaderboardUpdate(username, wins, games);
 
     return 0;
 }
