@@ -679,7 +679,7 @@ int main() {
         games++;
     }
     else {
-        games++;
+        playerGameplay(username,password);
     }
     leaderboardUpdate(username, wins, games);
 
