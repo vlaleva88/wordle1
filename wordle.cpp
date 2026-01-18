@@ -474,6 +474,7 @@ void selectAction(char* username, char* password) {
 
 
     bool login=false;
+    bool logInAdmin=false;
 
     while (!login) {
 
