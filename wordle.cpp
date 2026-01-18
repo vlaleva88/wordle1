@@ -403,6 +403,53 @@ int getPlayedGames(const char* username) {
     return playedGames;
 }
 
+void selectAction(char* username, char* password) {
+
+
+
+    bool login=false;
+
+    while (!login) {
+
+        cout<<"1. Login"<<endl;
+        cout<<"2. Register User"<<endl;
+        cout<<"3. Exit"<<endl;
+        cout<<"Enter your choice: ";
+        int choice;
+        cin>>choice;
+
+        switch (choice) {
+            case 1: {
+                cin.ignore();
+
+                cout<<"Username: ";
+                cin.getline(username,MAX_SIZE);
+                cout<<"Password: ";
+                cin.getline(password,MAX_SIZE);
+                loginUser(username,password,login);
+
+                if (!login) {
+                    break;
+                } break;
+            }
+            case 2: {
+                cin.ignore();
+
+                cout<<"Username: ";
+                cin.getline(username,MAX_SIZE);
+                cout<<"Password: ";
+                cin.getline(password,MAX_SIZE);
+                registerNewUser(username, password);
+                break;
+            }
+            case 3:
+                exit(0);
+            default:
+                cout<<"\033[91m"<<"Wrong choice. Please enter current choice!"<<"\033[0m"<<endl;
+        }
+    }
+}
+
 int main() {
     cout<<"\033[95m"<<"Welcome to the Wordle! Please choice: "<<"\033[0m"<<endl;
     cout<<"-------------------------------------"<<endl;
