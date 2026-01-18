@@ -37,6 +37,18 @@ void myStrcpy(const char* text1, const char* text2, char* result) {
     *result='\0';
 }
 
+int sizeOfWord(const char* word) {
+    if (word==nullptr) {
+        return 0;
+    }
+    int size=0;
+    while (*word) {
+        size++;
+        word++;
+    }
+    return size;
+}
+
 void registerNewUser(const char* username, const char* password) {
     // char username[MAX_SIZE];
     // char password[MAX_SIZE];
