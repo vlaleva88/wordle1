@@ -37,16 +37,16 @@ void myStrcpy(const char* text1, const char* text2, char* result) {
     *result='\0';
 }
 
-void registerNewUser() {
-    char username[MAX_SIZE];
-    char password[MAX_SIZE];
+void registerNewUser(const char* username, const char* password) {
+    // char username[MAX_SIZE];
+    // char password[MAX_SIZE];
 
-    cin.ignore();
+    // cin.ignore();
 
-    cout<<"Enter username: ";
-    cin.getline(username,MAX_SIZE);
-    cout<<"Enter password: ";
-    cin.getline(password,MAX_SIZE);
+    // cout<<"Enter username: ";
+    // cin.getline(username,MAX_SIZE);
+    // cout<<"Enter password: ";
+    // cin.getline(password,MAX_SIZE);
 
     ofstream file("users.txt",ios::app);
     if (!file) {
@@ -56,7 +56,7 @@ void registerNewUser() {
     file<<username<<" "<<password<<endl;
     file.close();
 
-    cout<<"Registered new user"<<endl;
+    cout<<"\033[92m"<<"Registered new user"<<"\033[0m"<<endl;
 }
 
 void loginUser(const char* username, const char* password, bool& found) {
@@ -243,7 +243,12 @@ int main() {
                 } break;
             }
             case 2:
-                registerNewUser();break;
+                cout<<"Username: ";
+                cin.getline(username,MAX_SIZE);
+                cout<<"Password: ";
+                cin.getline(password,MAX_SIZE);
+                registerNewUser(username, password);
+                break;
             case 3:
                 exit(0);
             default:
