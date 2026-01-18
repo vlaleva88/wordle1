@@ -558,6 +558,34 @@ void playerGameplay(const char* username, const char* password) {
     cout<<"You stats: "<<wins<<"/"<<games<<endl;
 }
 
+void removeWord(const char* word) {
+    ifstream file("words.txt");
+
+    if (!file.is_open()) {
+        cout<<"File could not be opened"<<endl;
+        return;
+    }
+
+    ofstream temp("temp.txt");
+    char line[MAX_SIZE_WORD+1];
+
+    while (file.getline(line,MAX_SIZE_WORD+1)) {
+        if (!isStringEqual(line,word)) {
+            temp<<line<<endl;
+        }
+
+    }
+    file.close();
+    temp.close();
+
+    remove("words.txt");
+    rename("temp.txt","words.txt");
+}
+
+void adminGameplay(const char* username, const char* password) {
+
+}
+
 int main() {
     cout<<"\033[95m"<<"Welcome to the Wordle! Please choice: "<<"\033[0m"<<endl;
     cout<<"-------------------------------------"<<endl;
