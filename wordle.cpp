@@ -582,6 +582,40 @@ void removeWord(const char* word) {
     rename("temp.txt","words.txt");
 }
 
+void addNewWord(const char* word) {
+    ofstream file("words.txt",ios::app);
+
+    if (!file.is_open()) {
+        cout<<"File could not be opened"<<endl;
+        return;
+    }
+
+    if (isInFile(word)) {
+        cout<<"You have already added"<<endl;
+    }
+    else {
+        file<<word<<endl;
+    }
+
+    file.close();
+}
+
+void printLeaderboard() {
+    ifstream file("leaderboard.txt");
+
+    if (!file.is_open()) {
+        cout<<"File could not be opened"<<endl;
+        return;
+    }
+
+    char fullData[2*MAX_SIZE+1];
+
+    while (file.getline(fullData,2*MAX_SIZE+1)) {
+        cout<<fullData<<endl;
+    }
+    file.close();
+}
+
 void adminGameplay(const char* username, const char* password) {
 
 }
