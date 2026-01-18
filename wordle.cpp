@@ -450,6 +450,32 @@ void selectAction(char* username, char* password) {
     }
 }
 
+void playerGameplay(const char* username, const char* password) {
+
+    cout<<"\033[95m"<<"Let's the game start"<<"\033[0m"<<endl;
+
+    bool flag=false;
+    trueGame(flag);
+
+    int games=0;
+    int wins=0;
+
+    if (isInLeaderboard(username)) {
+        games=getPlayedGames(username);
+        wins=getWins(username);
+    }
+
+    if (flag) {
+        wins++;
+        games++;
+    }
+    else {
+        games++;
+    }
+    leaderboardUpdate(username, wins, games);
+    cout<<"You stats: "<<wins<<"/"<<games<<endl;
+}
+
 int main() {
     cout<<"\033[95m"<<"Welcome to the Wordle! Please choice: "<<"\033[0m"<<endl;
     cout<<"-------------------------------------"<<endl;
