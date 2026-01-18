@@ -191,7 +191,7 @@ bool isInFile(const char* Word) {
     return false;
 }
 
-void trueGame() {
+void trueGame(bool& winGame) {
     ifstream file("words.txt");
 
     if (!file.is_open()) {
