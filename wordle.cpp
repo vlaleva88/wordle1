@@ -476,7 +476,7 @@ void selectAction(char* username, char* password) {
     bool login=false;
     bool logInAdmin=false;
 
-    while (!login) {
+    while (!login && !logInAdmin) {
 
         cout<<"1. Login"<<endl;
         cout<<"2. Register User"<<endl;
