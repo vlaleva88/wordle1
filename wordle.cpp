@@ -609,7 +609,7 @@ void printLeaderboard() {
     char fullData[2*MAX_SIZE+1];
 
     while (file.getline(fullData,2*MAX_SIZE+1)) {
-        cout<<fullData<<endl;
+        cout<<"\033[93m"<<fullData<<"\033[0m"<<endl;
     }
     file.close();
 }
