@@ -269,6 +269,18 @@ bool isInLeaderboard(const char* username) {
     return false;
 }
 
+void addNewUserInLeaderboard(const char* username, const int wins, const int playedGames) {
+    ofstream file("leaderboard.txt",ios::app);
+
+    if (!file.is_open()) {
+        cout<<"File could not be opened"<<endl;
+        return;
+    }
+
+    file<<username<<" "<<wins<<"/"<<playedGames<<endl;
+    file.close();
+}
+
 void leaderboard(const char* username, const int playedGame, const int wins) {
     ofstream file("leaderboard.txt");
 
