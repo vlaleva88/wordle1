@@ -335,7 +335,7 @@ void updateInformation(const char* username, const int wins, const int games) {
 
 // update every time leaderboard
 void leaderboardUpdate(const char* username, const int playedGame, const int wins) {
-    ofstream file("leaderboard.txt");
+    ofstream file("leaderboard.txt", ios::app);
 
     if (!file.is_open()) {
         cout<<"File could not be opened"<<endl;
