@@ -227,6 +227,24 @@ void trueGame() {
     delete[] searchWord;
 }
 
+// isInLeaderboard
+char* getUsername(const char* string) {
+    if (string==nullptr) {
+        return nullptr;
+    }
+
+    char* username=new char[MAX_SIZE+1];
+    int usernameIndex=0;
+    while (*string!=' ' && *string) {
+        username[usernameIndex]=*string;
+        string++;
+        usernameIndex++;
+    }
+    username[usernameIndex]='\0';
+
+    return username;
+}
+
 bool isInLeaderboard(const char* username) {
     ifstream file("leaderboard.txt");
 
