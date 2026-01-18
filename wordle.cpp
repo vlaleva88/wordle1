@@ -641,6 +641,7 @@ void adminGameplay(const char* username, const char* password) {
             } break;
             case 3: {
                 cin.ignore();
+                cout<<endl;
                 printLeaderboard();
             } break;
             default: {
