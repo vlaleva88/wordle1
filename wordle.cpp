@@ -54,15 +54,6 @@ int sizeOfWord(const char* word) {
 }
 
 void registerNewUser(const char* username, const char* password) {
-    // char username[MAX_SIZE];
-    // char password[MAX_SIZE];
-
-    // cin.ignore();
-
-    // cout<<"Enter username: ";
-    // cin.getline(username,MAX_SIZE);
-    // cout<<"Enter password: ";
-    // cin.getline(password,MAX_SIZE);
 
     ofstream file("users.txt",ios::app);
     if (!file) {
@@ -76,15 +67,6 @@ void registerNewUser(const char* username, const char* password) {
 }
 
 void loginUser(const char* username, const char* password, bool& found) {
-    // char username[MAX_SIZE];
-    // char password[MAX_SIZE];
-    // cout<<"Username: ";
-    // cin.getline(username,MAX_SIZE);
-    // cout<<"Password: ";
-    // cin.getline(password,MAX_SIZE);
-
-    // bool found=false;
-
     ifstream file("users.txt");
     if (!file.is_open()) {
         cout<<"File could not be opened"<<endl;
@@ -127,7 +109,6 @@ int wordCounterInFile() {
 
     while (file.getline(wordInFile,MAX_SIZE_WORD+1)) {
         count++;
-        // cout<<wordInFile<<endl;
     }
     file.close();
     delete[] wordInFile;
@@ -189,6 +170,7 @@ void colorLetter(const char* trueWord, const char* Word, int& current) {
     }
 }
 
+// trueGame
 bool isInFile(const char* Word) {
     ifstream file("words.txt");
     if (!file.is_open()) {
@@ -233,7 +215,23 @@ void trueGame() {
     int countCurrentLetter=0;
     char* word=new char[MAX_SIZE_WORD+1];
     while (availableTimes!=0 && countCurrentLetter!=MAX_SIZE_WORD) {
+
         cin.getline(word,MAX_SIZE_WORD+1);
+        if (sizeOfWord(word)!=MAX_SIZE_WORD) {
+            cout<<"The size is different. Enter new word: ";
+            cout<<endl;
+            cin.clear();
+            continue;
+        }
+
+        if (!isInFile(word)) {
+            cout<<"The word isn't in file yet. Enter new: ";
+            cout<<endl;
+            cin.clear();
+            continue;
+        }
+
+        // cin.getline(word,MAX_SIZE_WORD+1);
         countCurrentLetter=0;
         colorLetter(searchWord,word,countCurrentLetter);
         availableTimes--;
@@ -355,7 +353,8 @@ void leaderboardUpdate(const char* username, const int playedGame, const int win
 }
 
 int main() {
-    cout<<"Welcome! Please choice: "<<endl;
+    cout<<"\033[95m"<<"Welcome to the Wordle! Please choice: "<<"\033[0m"<<endl;
+    cout<<"-------------------------------------"<<endl;
     cout<<"1. Login"<<endl;
     cout<<"2. Register User"<<endl;
     cout<<"3. Exit"<<endl;
@@ -381,13 +380,14 @@ int main() {
                     loginUser(username,password,found);
                 } break;
             }
-            case 2:
+            case 2: {
                 cout<<"Username: ";
                 cin.getline(username,MAX_SIZE);
                 cout<<"Password: ";
                 cin.getline(password,MAX_SIZE);
                 registerNewUser(username, password);
                 break;
+            }
             case 3:
                 exit(0);
             default:
@@ -395,7 +395,7 @@ int main() {
         }
     }
 
-
-
-    // trueGame();
+    cout<<endl;
+    cout<<"\033[95m"<<"Let's the game start"<<"\033[0m"<<endl;
+    trueGame();
 }
