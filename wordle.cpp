@@ -280,7 +280,7 @@ bool isInLeaderboard(const char* username) {
     while (file.getline(fullData,2*MAX_SIZE+1)) {
         char* usernameInFile=getUsername(fullData);
         if (isStringEqual(usernameInFile, username)) {
-            cout<<usernameInFile<<endl;
+            // cout<<usernameInFile<<endl;
             file.close();
             delete[] usernameInFile;
             return true;
