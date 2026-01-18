@@ -352,6 +352,35 @@ void leaderboardUpdate(const char* username, const int playedGame, const int win
     file.close();
 }
 
+int getWins(const char* username) {
+    ifstream file("leaderboard.txt");
+
+    if (!file.is_open()) {
+        cout<<"File could not be opened"<<endl;
+        return -1;
+    }
+
+    char line[2*MAX_SIZE+1];
+    int wins;
+
+    while (file.getline(line,2*MAX_SIZE+1)) {
+        char* name=getUsername(line);
+
+        if (isStringEqual(name,username)) {
+            sscanf(line, "%*s %d/", &wins);
+        }
+        else {
+
+        }
+
+        delete[] name;
+    }
+
+    file.close();
+    return wins;
+
+}
+
 int main() {
     cout<<"\033[95m"<<"Welcome to the Wordle! Please choice: "<<"\033[0m"<<endl;
     cout<<"-------------------------------------"<<endl;
