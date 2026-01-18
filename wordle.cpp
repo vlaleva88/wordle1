@@ -617,6 +617,12 @@ void printLeaderboard() {
 }
 
 void adminGameplay(const char* username, const char* password) {
+    cout<<"\033[96m"<<"ADMIN MENU"<<"\033[0m"<<endl;
+    cout<<"1. Remove word"<<endl;
+    cout<<"2. Add word"<<endl;
+    cout<<"3. Leaderboard"<<endl;
+
+    int choice=0;
 
 }
 
