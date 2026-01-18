@@ -188,6 +188,31 @@ bool isInFile(const char* Word) {
     return false;
 }
 
+bool isLowercase(const char symbol) {
+    return (symbol>='a' && symbol<='z');
+}
+
+bool isOnlyLowercase(const char* word) {
+    int index=0;
+    while (word[index]!='\0') {
+        if (!isLowercase(word[index])) {
+            return false;
+        }
+        index++;
+    }
+    return true;
+}
+
+bool isValidData(const char* word) {
+    if (word==nullptr) {
+        return false;
+    }
+    if (isOnlyLowercase(word) && sizeOfWord(word)==MAX_SIZE_WORD) {
+        return true;
+    }
+    return false;
+}
+
 void trueGame(bool& winGame) {
     ifstream file("words.txt");
 
