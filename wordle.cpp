@@ -471,8 +471,6 @@ void loginAdmin(const char* username, const char* password, bool& found) {
 
 void selectAction(char* username, char* password) {
 
-
-
     bool login=false;
     bool logInAdmin=false;
 
