@@ -442,7 +442,13 @@ void selectAction(char* username, char* password) {
                 cin.getline(password,MAX_SIZE);
                 loginUser(username,password,login);
 
-                if (!login) {
+                loginAdmin(username,password,logInAdmin);
+
+                if (!login && !logInAdmin) {
+                    cout<<"\033[91m"<<"Wrong username or password. Try again!"<<"\033[0m"<<endl;
+                }
+
+                if (!login && !logInAdmin) {
                     break;
                 } break;
             }
