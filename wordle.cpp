@@ -285,7 +285,38 @@ void addNewUserInLeaderboard(const char* username, const int wins, const int pla
     file.close();
 }
 
-void leaderboard(const char* username, const int playedGame, const int wins) {
+void updateInformation(const char* username, const int wins, const int games) {
+    ifstream file("leaderboard.txt");
+
+    if (!file.is_open()) {
+        cout<<"File could not be opened"<<endl;
+        return;
+    }
+
+    ofstream temp("temp.txt");
+    char line[2*MAX_SIZE+1];
+
+    while (file.getline(line,2*MAX_SIZE+1)) {
+        char* name=getUsername(line);
+
+        if (isStringEqual(name,username)) {
+            temp<<username<<" "<<wins<<"/"<<games<<endl;
+        }
+        else {
+            temp<<line<<endl;
+        }
+
+        delete[] name;
+    }
+    file.close();
+    temp.close();
+
+    remove("leaderboard.txt");
+    rename("temp.txt","leaderboard.txt");
+}
+
+// update every time leaderboard
+void leaderboardUpdate(const char* username, const int playedGame, const int wins) {
     ofstream file("leaderboard.txt");
 
     if (!file) {
