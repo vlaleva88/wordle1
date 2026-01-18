@@ -324,6 +324,12 @@ void leaderboardUpdate(const char* username, const int playedGame, const int win
         return;
     }
 
+    if (!isInLeaderboard(username)) {
+        addNewUserInLeaderboard(username, wins, playedGame);
+    }
+    else {
+        updateInformation(username, wins, playedGame);
+    }
 
 }
 
