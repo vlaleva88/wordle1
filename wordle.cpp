@@ -189,6 +189,26 @@ void colorLetter(const char* trueWord, const char* Word, int& current) {
     }
 }
 
+bool isInFile(const char* Word) {
+    ifstream file("words.txt");
+    if (!file.is_open()) {
+        cout<<"File could not be opened"<<endl;
+        return false;
+    }
+
+    char* line=new char[MAX_SIZE_WORD+1];
+    while (file.getline(line,MAX_SIZE_WORD+1)) {
+        if (isStringEqual(line,Word)) {
+            file.close();
+            delete[] line;
+            return true;
+        }
+    }
+    file.close();
+    delete[] line;
+    return false;
+}
+
 void trueGame() {
     ifstream file("words.txt");
 
