@@ -16,7 +16,11 @@ bool isStringEqual(const char* text1, const char* text2) {
             return false;
         }
     }
-    return true;
+
+    if (*text1=='\0' && *text2=='\0') {
+        return true;
+    }
+    return false;
 }
 
 void myStrcpy(const char* text1, const char* text2, char* result) {
