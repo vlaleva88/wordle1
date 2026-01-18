@@ -239,6 +239,10 @@ void trueGame(bool& winGame) {
     while (availableTimes!=0 && countCurrentLetter!=MAX_SIZE_WORD) {
 
         cin.getline(word,MAX_SIZE_WORD+1);
+        while (!isValidData(word)) {
+            cin.getline(word,MAX_SIZE_WORD+1);
+        }
+
         if (sizeOfWord(word)!=MAX_SIZE_WORD) {
             cout<<"The size is different. Enter new word: ";
             cout<<endl;
