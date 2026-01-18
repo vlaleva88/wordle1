@@ -369,9 +369,6 @@ int getWins(const char* username) {
         if (isStringEqual(name,username)) {
             sscanf(line, "%*s %d/", &wins);
         }
-        else {
-
-        }
 
         delete[] name;
     }
