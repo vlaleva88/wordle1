@@ -670,12 +670,8 @@ int main() {
     bool flag=false;
     trueGame(flag);
 
-    int games=0;
-    int wins=0;
-
-    if (isInLeaderboard(username)) {
-        games=getPlayedGames(username);
-        wins=getWins(username);
+    if (isInAdminList(username)) {
+        adminGameplay(username,password);
     }
 
     if (flag) {
