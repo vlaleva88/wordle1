@@ -59,16 +59,15 @@ void registerNewUser() {
     cout<<"Registered new user"<<endl;
 }
 
+void loginUser(const char* username, const char* password, bool& found) {
+    // char username[MAX_SIZE];
+    // char password[MAX_SIZE];
+    // cout<<"Username: ";
+    // cin.getline(username,MAX_SIZE);
+    // cout<<"Password: ";
+    // cin.getline(password,MAX_SIZE);
 
-void loginUser() {
-    char username[MAX_SIZE];
-    char password[MAX_SIZE];
-    cout<<"Username: ";
-    cin.getline(username,MAX_SIZE);
-    cout<<"Password: ";
-    cin.getline(password,MAX_SIZE);
-
-    bool found=false;
+    // bool found=false;
 
     ifstream file("users.txt");
     if (!file.is_open()) {
@@ -92,9 +91,10 @@ void loginUser() {
     // can make check for wrong username or wrong password
     if (found) {
         cout<<"Successfully logged in"<<endl;
+        cout<<"Welcome back, "<<username<<endl;
     }
     else {
-        cout<<"Wrong username or password"<<endl;
+        cout<<"Wrong username or password. Try again!"<<endl;
     }
 }
 
@@ -151,8 +151,6 @@ bool isInWord(const char* Word,const char symbol) {
     }
     return false;
 }
-
-
 
 void colorLetter(const char* trueWord, const char* Word, int& current) {
     if (trueWord==nullptr) {
@@ -215,4 +213,46 @@ void trueGame() {
     }
 
     delete[] searchWord;
+}
+
+int main() {
+    cout<<"Welcome! Please choice: "<<endl;
+    cout<<"1. Login"<<endl;
+    cout<<"2. Register User"<<endl;
+    cout<<"3. Exit"<<endl;
+    int choice=0;
+    cout<<"Enter your choice: ";
+
+    char username[MAX_SIZE];
+    char password[MAX_SIZE];
+
+    while (choice!= 1 && choice!=2 && choice!=3) {
+        cin>>choice;
+
+        cin.ignore();
+
+        switch (choice) {
+            case 1: {
+                bool found=false;
+                while (!found) {
+                    cout<<"Username: ";
+                    cin.getline(username,MAX_SIZE);
+                    cout<<"Password: ";
+                    cin.getline(password,MAX_SIZE);
+                    loginUser(username,password,found);
+                } break;
+            }
+            case 2:
+                registerNewUser();break;
+            case 3:
+                exit(0);
+            default:
+                cout<<"Wrong choice. Please enter current choice!"<<endl;
+        }
+    }
+
+
+
+
+    // trueGame();
 }
