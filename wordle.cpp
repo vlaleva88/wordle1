@@ -624,6 +624,32 @@ void adminGameplay(const char* username, const char* password) {
 
     int choice=0;
 
+    while (choice!=1 && choice!=2 && choice!=3)  {
+        cout<<"Enter your choice: ";
+        cin>>choice;
+
+        switch (choice) {
+            case 1: {
+                cin.ignore();
+                char wordToRemove[MAX_SIZE_WORD];
+                cin.getline(wordToRemove,MAX_SIZE_WORD);
+                removeWord(wordToRemove);
+            } break;
+            case 2: {
+                cin.ignore();
+                char wordToAdd[MAX_SIZE_WORD];
+                cin.getline(wordToAdd,MAX_SIZE_WORD);
+                addNewWord(wordToAdd);
+            } break;
+            case 3: {
+                cin.ignore();
+                printLeaderboard();
+            } break;
+            default: {
+                cout<<"\033[91m"<<"Wrong choice. Please enter current choice!"<<"\033[0m"<<endl;
+            }
+        }
+    }
 }
 
 int main() {
