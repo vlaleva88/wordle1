@@ -331,6 +331,7 @@ void leaderboardUpdate(const char* username, const int playedGame, const int win
         updateInformation(username, wins, playedGame);
     }
 
+    file.close();
 }
 
 int main() {
