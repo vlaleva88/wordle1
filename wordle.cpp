@@ -403,6 +403,20 @@ int getPlayedGames(const char* username) {
     return playedGames;
 }
 
+void registerNewAdmin(const char* username, const char* password) {
+    ofstream file("admins.txt", ios::app);
+
+    if (!file.is_open()) {
+        cout<<"File could not be opened"<<endl;
+        return;
+    }
+
+    file<<username<<" "<<password<<endl;
+    file.close();
+
+    cout<<"\033[92m"<<"Admin registered"<<"\033[0m"<<endl;
+}
+
 void selectAction(char* username, char* password) {
 
 
