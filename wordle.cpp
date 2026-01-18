@@ -448,5 +448,26 @@ int main() {
 
     cout<<endl;
     cout<<"\033[95m"<<"Let's the game start"<<"\033[0m"<<endl;
-    trueGame();
+
+    bool flag=false;
+    trueGame(flag);
+
+    int games=0;
+    int wins=0;
+
+    if (isInLeaderboard(username)) {
+        games=getPlayedGames(username);
+        wins=getWins(username);
+    }
+
+    if (flag) {
+        wins++;
+        games++;
+    }
+    else {
+        games++;
+    }
+    leaderboardUpdate(username, wins, games);
+
+    return 0;
 }
