@@ -19,49 +19,48 @@
 
 using namespace std;
 
-constexpr int MAX_SIZE=40;
-constexpr int MAX_SIZE_WORD=5;
+constexpr int MAX_SIZE = 40;
+constexpr int MAX_SIZE_WORD = 5;
 
-bool isStringEqual(const char* text1, const char* text2) {
+bool isStringEqual(const char *text1, const char *text2) {
     while (*text1 || *text2) {
-        if (*text1==*text2) {
+        if (*text1 == *text2) {
             text1++;
             text2++;
-        }
-        else {
+        } else {
             return false;
         }
     }
 
-    if (*text1=='\0' && *text2=='\0') {
+    if (*text1 == '\0' && *text2 == '\0') {
         return true;
     }
     return false;
 }
 
-void myStrcpy(const char* text1, const char* text2, char* result) {
+void myStrcpy(const char *text1, const char *text2, char *result) {
     while (*text1) {
-        *result=*text1;
+        *result = *text1;
         result++;
         text1++;
     }
 
-    *result=' ';
+    *result = ' ';
     result++;
 
     while (*text2) {
-        *result=*text2;
+        *result = *text2;
         result++;
         text2++;
     }
-    *result='\0';
+    *result = '\0';
 }
 
-int sizeOfWord(const char* word) {
-    if (word==nullptr) {
+int sizeOfWord(const char *word) {
+    if (word == nullptr) {
         return 0;
     }
-    int size=0;
+    int size = 0;
     while (*word) {
         size++;
         word++;
@@ -69,34 +68,33 @@ int sizeOfWord(const char* word) {
     return size;
 }
 
-void registerNewUser(const char* username, const char* password) {
-
-    ofstream file("users.txt",ios::app);
+void registerNewUser(const char *username, const char *password) {
+    ofstream file("users.txt", ios::app);
     if (!file) {
-        cout<<"File could not be opened"<<endl;
+        cout << "File could not be opened" << endl;
         return;
     }
-    file<<username<<" "<<password<<endl;
+    file << username << " " << password << endl;
     file.close();
 
-    cout<<"\033[92m"<<"Registered new user"<<"\033[0m"<<endl;
+    cout << "\033[92m" << "Registered new user" << "\033[0m" << endl;
 }
 
-void loginUser(const char* username, const char* password, bool& found) {
+void loginUser(const char *username, const char *password, bool &found) {
     ifstream file("users.txt");
     if (!file.is_open()) {
-        cout<<"File could not be opened"<<endl;
+        cout << "File could not be opened" << endl;
         return;
     }
 
-    char fullData[2*MAX_SIZE+1];
+    char fullData[2 * MAX_SIZE + 1];
     myStrcpy(username, password, fullData);
 
-    constexpr int MAX_SiZE_FILE=2*MAX_SIZE+2;
+    constexpr int MAX_SiZE_FILE = 2 * MAX_SIZE + 2;
     char lineInFile[MAX_SiZE_FILE];
-    while (file.getline(lineInFile,MAX_SiZE_FILE-1)) {
-        if (isStringEqual(lineInFile,fullData)) {
-            found=true;
+    while (file.getline(lineInFile, MAX_SiZE_FILE - 1)) {
+        if (isStringEqual(lineInFile, fullData)) {
+            found = true;
             break;
         }
     }
@@ -104,23 +102,23 @@ void loginUser(const char* username, const char* password, bool& found) {
 
     // can make check for wrong username or wrong password
     if (found) {
-        cout<<"\033[92m"<<"Successfully logged in"<<"\033[0m"<<endl;
-        cout<<"Welcome back, "<<username<<endl;
+        cout << "\033[92m" << "Successfully logged in" << "\033[0m" << endl;
+        cout << "Welcome back, " << username << endl;
     }
 }
 
 int wordCounterInFile() {
     ifstream file("words.txt");
     if (!file.is_open()) {
-        cout<<"File could not be opened"<<endl;
+        cout << "File could not be opened" << endl;
         return -1;
     }
 
 
-    char* wordInFile=new char[MAX_SIZE_WORD+1];
-    int count=0;
+    char *wordInFile = new char[MAX_SIZE_WORD + 1];
+    int count = 0;
 
-    while (file.getline(wordInFile,MAX_SIZE_WORD+1)) {
+    while (file.getline(wordInFile, MAX_SIZE_WORD + 1)) {
         count++;
     }
     file.close();
@@ -129,19 +127,18 @@ int wordCounterInFile() {
     return count;
 }
 
-char* getWordFromLine(const int line) {
-
+char *getWordFromLine(const int line) {
     ifstream file("words.txt");
     if (!file.is_open()) {
-        cout<<"File could not be opened"<<endl;
+        cout << "File could not be opened" << endl;
         return nullptr;
     }
 
-    char* wordInFile=new char[MAX_SIZE_WORD+1];
+    char *wordInFile = new char[MAX_SIZE_WORD + 1];
 
-    int count=1;
-    while (file.getline(wordInFile,MAX_SIZE_WORD+1)) {
-        if (count==line) {
+    int count = 1;
+    while (file.getline(wordInFile, MAX_SIZE_WORD + 1)) {
+        if (count == line) {
             file.close();
             return wordInFile;
         }
@@ -152,9 +149,9 @@ char* getWordFromLine(const int line) {
     return nullptr;
 }
 
-bool isInWord(const char* Word,const char symbol) {
+bool isInWord(const char *Word, const char symbol) {
     while (*Word) {
-        if (*Word==symbol) {
+        if (*Word == symbol) {
             return true;
         }
         Word++;
@@ -162,38 +159,36 @@ bool isInWord(const char* Word,const char symbol) {
     return false;
 }
 
-void colorLetter(const char* trueWord, const char* Word, int& current) {
-    if (trueWord==nullptr) {
+void colorLetter(const char *trueWord, const char *Word, int &current) {
+    if (trueWord == nullptr) {
         return;
     }
 
-    for (int i=0;i<MAX_SIZE_WORD;i++) {
-        if (Word[i]==trueWord[i]) {
-            cout<<"\033[92m"<<Word[i]<<"\033[0m";
+    for (int i = 0; i < MAX_SIZE_WORD; i++) {
+        if (Word[i] == trueWord[i]) {
+            cout << "\033[92m" << Word[i] << "\033[0m";
             current++;
-        }
-        else {
-            if (isInWord(trueWord,Word[i])) {
-                cout<<"\033[93m"<<Word[i]<<"\033[0m";
-            }
-            else {
-                cout<<"\033[97m"<<Word[i]<<"\033[0m";
+        } else {
+            if (isInWord(trueWord, Word[i])) {
+                cout << "\033[93m" << Word[i] << "\033[0m";
+            } else {
+                cout << "\033[97m" << Word[i] << "\033[0m";
             }
         }
     }
 }
 
 // trueGame
-bool isInFile(const char* Word) {
+bool isInFile(const char *Word) {
     ifstream file("words.txt");
     if (!file.is_open()) {
-        cout<<"File could not be opened"<<endl;
+        cout << "File could not be opened" << endl;
         return false;
     }
 
-    char* line=new char[MAX_SIZE_WORD+1];
-    while (file.getline(line,MAX_SIZE_WORD+1)) {
-        if (isStringEqual(line,Word)) {
+    char *line = new char[MAX_SIZE_WORD + 1];
+    while (file.getline(line, MAX_SIZE_WORD + 1)) {
+        if (isStringEqual(line, Word)) {
             file.close();
             delete[] line;
             return true;
@@ -205,12 +200,12 @@ bool isInFile(const char* Word) {
 }
 
 bool isLowercase(const char symbol) {
-    return (symbol>='a' && symbol<='z');
+    return (symbol >= 'a' && symbol <= 'z');
 }
 
-bool isOnlyLowercase(const char* word) {
-    int index=0;
-    while (word[index]!='\0') {
+bool isOnlyLowercase(const char *word) {
+    int index = 0;
+    while (word[index] != '\0') {
         if (!isLowercase(word[index])) {
             return false;
         }
@@ -219,21 +214,21 @@ bool isOnlyLowercase(const char* word) {
     return true;
 }
 
-bool isValidData(const char* word) {
-    if (word==nullptr) {
+bool isValidData(const char *word) {
+    if (word == nullptr) {
         return false;
     }
-    if (isOnlyLowercase(word) && sizeOfWord(word)==MAX_SIZE_WORD) {
+    if (isOnlyLowercase(word) && sizeOfWord(word) == MAX_SIZE_WORD) {
         return true;
     }
     return false;
 }
 
-void trueGame(bool& winGame) {
+void trueGame(bool &winGame) {
     ifstream file("words.txt");
 
     if (!file.is_open()) {
-        cout<<"File could not be opened"<<endl;
+        cout << "File could not be opened" << endl;
         return;
     }
     file.close();
@@ -241,87 +236,85 @@ void trueGame(bool& winGame) {
     srand(time(0));
 
     // get word
-    const int randomWordIndex=rand()%wordCounterInFile()+1;
+    const int randomWordIndex = rand() % wordCounterInFile() + 1;
     // cout<<randomWordIndex<<" -> ";
 
-    const char* searchWord=getWordFromLine(randomWordIndex);
+    const char *searchWord = getWordFromLine(randomWordIndex);
     // cout<<searchWord<<endl;
 
     // can make different
-    int availableTimes=6;
+    int availableTimes = 6;
 
-    int countCurrentLetter=0;
-    char* word=new char[MAX_SIZE_WORD+1];
-    while (availableTimes!=0 && countCurrentLetter!=MAX_SIZE_WORD) {
+    int countCurrentLetter = 0;
+    char *word = new char[MAX_SIZE_WORD + 1];
+    while (availableTimes != 0 && countCurrentLetter != MAX_SIZE_WORD) {
+        cin.getline(word, MAX_SIZE_WORD + 1);
+        // while (!isValidData(word)) {
+        //     cin.getline(word,MAX_SIZE_WORD+1);
+        // }
 
-        cin.getline(word,MAX_SIZE_WORD+1);
-        while (!isValidData(word)) {
-            cin.getline(word,MAX_SIZE_WORD+1);
-        }
-
-        if (sizeOfWord(word)!=MAX_SIZE_WORD) {
-            cout<<"The size is different. Enter new word: ";
-            cout<<endl;
+        if (sizeOfWord(word) != MAX_SIZE_WORD) {
+            cout << "The size is different. Enter new word: ";
+            cout << endl;
             cin.clear();
             continue;
         }
 
         if (!isInFile(word)) {
-            cout<<"The word isn't in file yet. Enter new: ";
-            cout<<endl;
+            cout << "The word isn't in file yet. Enter new: ";
+            cout << endl;
             cin.clear();
             continue;
         }
 
         // cin.getline(word,MAX_SIZE_WORD+1);
-        countCurrentLetter=0;
-        colorLetter(searchWord,word,countCurrentLetter);
+        countCurrentLetter = 0;
+        colorLetter(searchWord, word, countCurrentLetter);
         availableTimes--;
-        cout<<endl;
+        cout << endl;
     }
     delete[] word;
 
-    if (availableTimes==0 && countCurrentLetter!=MAX_SIZE_WORD) {
-        cout<<"No more times! The word is: "<<searchWord<<endl;
-    }
-    else {
-        winGame=true;
-        cout<<"Congratulations! You win!"<<endl;
+    if (availableTimes == 0 && countCurrentLetter != MAX_SIZE_WORD) {
+        cout << "No more times! The word is: " << searchWord << endl;
+    } else {
+        winGame = true;
+        cout << "Congratulations! You win!" << endl;
     }
 
     delete[] searchWord;
 }
 
 // isInLeaderboard
-char* getUsername(const char* string) {
-    if (string==nullptr) {
+char *getUsername(const char *string) {
+    if (string == nullptr) {
         return nullptr;
     }
 
-    char* username=new char[MAX_SIZE+1];
-    int usernameIndex=0;
-    while (*string!=' ' && *string) {
-        username[usernameIndex]=*string;
+    char *username = new char[MAX_SIZE + 1];
+    int usernameIndex = 0;
+    while (*string != ' ' && *string) {
+        username[usernameIndex] = *string;
         string++;
         usernameIndex++;
     }
-    username[usernameIndex]='\0';
+    username[usernameIndex] = '\0';
 
     return username;
 }
 
-bool isInLeaderboard(const char* username) {
+bool isInLeaderboard(const char *username) {
     ifstream file("leaderboard.txt");
 
     if (!file.is_open()) {
-        cout<<"File could not be opened"<<endl;
+        cout << "File could not be opened" << endl;
         return false;
     }
 
-    char fullData[2*MAX_SIZE+1];
+    char fullData[2 * MAX_SIZE + 1];
 
-    while (file.getline(fullData,2*MAX_SIZE+1)) {
-        char* usernameInFile=getUsername(fullData);
+    while (file.getline(fullData, 2 * MAX_SIZE + 1)) {
+        char *usernameInFile = getUsername(fullData);
         if (isStringEqual(usernameInFile, username)) {
             // cout<<usernameInFile<<endl;
             file.close();
@@ -334,37 +327,36 @@ bool isInLeaderboard(const char* username) {
     return false;
 }
 
-void addNewUserInLeaderboard(const char* username, const int wins, const int playedGames) {
-    ofstream file("leaderboard.txt",ios::app);
+void addNewUserInLeaderboard(const char *username, const int wins, const int playedGames) {
+    ofstream file("leaderboard.txt", ios::app);
 
     if (!file.is_open()) {
-        cout<<"File could not be opened"<<endl;
+        cout << "File could not be opened" << endl;
         return;
     }
 
-    file<<username<<" "<<wins<<"/"<<playedGames<<endl;
+    file << username << " " << wins << "/" << playedGames << endl;
     file.close();
 }
 
-void updateInformation(const char* username, const int wins, const int games) {
+void updateInformation(const char *username, const int wins, const int games) {
     ifstream file("leaderboard.txt");
 
     if (!file.is_open()) {
-        cout<<"File could not be opened"<<endl;
+        cout << "File could not be opened" << endl;
         return;
     }
 
     ofstream temp("temp.txt");
-    char line[2*MAX_SIZE+1];
+    char line[2 * MAX_SIZE + 1];
 
-    while (file.getline(line,2*MAX_SIZE+1)) {
-        char* name=getUsername(line);
+    while (file.getline(line, 2 * MAX_SIZE + 1)) {
+        char *name = getUsername(line);
 
-        if (isStringEqual(name,username)) {
-            temp<<username<<" "<<wins<<"/"<<games<<endl;
-        }
-        else {
-            temp<<line<<endl;
+        if (isStringEqual(name, username)) {
+            temp << username << " " << wins << "/" << games << endl;
+        } else {
+            temp << line << endl;
         }
 
         delete[] name;
@@ -373,43 +365,42 @@ void updateInformation(const char* username, const int wins, const int games) {
     temp.close();
 
     remove("leaderboard.txt");
-    rename("temp.txt","leaderboard.txt");
+    rename("temp.txt", "leaderboard.txt");
 }
 
 // update every time leaderboard
-void leaderboardUpdate(const char* username, const int playedGame, const int wins) {
+void leaderboardUpdate(const char *username, const int playedGame, const int wins) {
     ofstream file("leaderboard.txt", ios::app);
 
     if (!file.is_open()) {
-        cout<<"File could not be opened"<<endl;
+        cout << "File could not be opened" << endl;
         return;
     }
 
     if (!isInLeaderboard(username)) {
         addNewUserInLeaderboard(username, wins, playedGame);
-    }
-    else {
+    } else {
         updateInformation(username, wins, playedGame);
     }
 
     file.close();
 }
 
-int getWins(const char* username) {
+int getWins(const char *username) {
     ifstream file("leaderboard.txt");
 
     if (!file.is_open()) {
-        cout<<"File could not be opened"<<endl;
+        cout << "File could not be opened" << endl;
         return -1;
     }
 
-    char line[2*MAX_SIZE+1];
+    char line[2 * MAX_SIZE + 1];
     int wins;
 
-    while (file.getline(line,2*MAX_SIZE+1)) {
-        char* name=getUsername(line);
+    while (file.getline(line, 2 * MAX_SIZE + 1)) {
+        char *name = getUsername(line);
 
-        if (isStringEqual(name,username)) {
+        if (isStringEqual(name, username)) {
             sscanf(line, "%*s %d/", &wins);
         }
 
@@ -418,24 +409,23 @@ int getWins(const char* username) {
 
     file.close();
     return wins;
-
 }
 
-int getPlayedGames(const char* username) {
+int getPlayedGames(const char *username) {
     ifstream file("leaderboard.txt");
 
     if (!file.is_open()) {
-        cout<<"File could not be opened"<<endl;
+        cout << "File could not be opened" << endl;
         return -1;
     }
 
-    char line[2*MAX_SIZE+1];
-    int playedGames=0;
+    char line[2 * MAX_SIZE + 1];
+    int playedGames = 0;
 
-    while (file.getline(line,2*MAX_SIZE+1)) {
-        char* name=getUsername(line);
+    while (file.getline(line, 2 * MAX_SIZE + 1)) {
+        char *name = getUsername(line);
 
-        if (isStringEqual(name,username)) {
+        if (isStringEqual(name, username)) {
             sscanf(line, "%*s %*d/%d", &playedGames);
         }
 
@@ -446,32 +436,32 @@ int getPlayedGames(const char* username) {
     return playedGames;
 }
 
-void registerNewAdmin(const char* username, const char* password) {
+void registerNewAdmin(const char *username, const char *password) {
     ofstream file("admins.txt", ios::app);
 
     if (!file.is_open()) {
-        cout<<"File could not be opened"<<endl;
+        cout << "File could not be opened" << endl;
         return;
     }
 
-    file<<username<<" "<<password<<endl;
+    file << username << " " << password << endl;
     file.close();
 
-    cout<<"\033[92m"<<"Admin registered"<<"\033[0m"<<endl;
+    cout << "\033[92m" << "Admin registered" << "\033[0m" << endl;
 }
 
-bool isInAdminList(const char* username) {
+bool isInAdminList(const char *username) {
     ifstream file("admins.txt");
 
     if (!file.is_open()) {
-        cout<<"File could not be opened"<<endl;
+        cout << "File could not be opened" << endl;
         return false;
     }
 
-    char line[2*MAX_SIZE+1];
-    while (file.getline(line,2*MAX_SIZE+1)) {
-        char* name=getUsername(line);
-        if (isStringEqual(name,username)) {
+    char line[2 * MAX_SIZE + 1];
+    while (file.getline(line, 2 * MAX_SIZE + 1)) {
+        char *name = getUsername(line);
+        if (isStringEqual(name, username)) {
             file.close();
             delete[] name;
             return true;
@@ -482,22 +472,22 @@ bool isInAdminList(const char* username) {
     return false;
 }
 
-void loginAdmin(const char* username, const char* password, bool& found) {
+void loginAdmin(const char *username, const char *password, bool &found) {
     ifstream file("admins.txt");
 
     if (!file.is_open()) {
-        cout<<"File could not be opened"<<endl;
+        cout << "File could not be opened" << endl;
         return;
     }
 
-    char fullData[2*MAX_SIZE+1];
+    char fullData[2 * MAX_SIZE + 1];
     myStrcpy(username, password, fullData);
 
-    constexpr int MAX_SiZE_FILE=2*MAX_SIZE+2;
+    constexpr int MAX_SiZE_FILE = 2 * MAX_SIZE + 2;
     char lineInFile[MAX_SiZE_FILE];
-    while (file.getline(lineInFile,MAX_SiZE_FILE-1)) {
-        if (isStringEqual(lineInFile,fullData)) {
-            found=true;
+    while (file.getline(lineInFile, MAX_SiZE_FILE - 1)) {
+        if (isStringEqual(lineInFile, fullData)) {
+            found = true;
             break;
         }
     }
@@ -505,64 +495,61 @@ void loginAdmin(const char* username, const char* password, bool& found) {
 
     // can make check for wrong username or wrong password
     if (found) {
-        cout<<"\033[92m"<<"Successfully logged in"<<"\033[0m"<<endl;
-    }
-    else {
-        cout<<"\033[91m"<<"Wrong username or password. Try again!"<<"\033[0m"<<endl;
+        cout << "\033[92m" << "Successfully logged in" << "\033[0m" << endl;
     }
 }
 
-void selectAction(char* username, char* password) {
-
-    bool login=false;
-    bool logInAdmin=false;
+void selectAction(char *username, char *password) {
+    bool login = false;
+    bool logInAdmin = false;
 
     while (!login && !logInAdmin) {
-
-        cout<<"1. Login"<<endl;
-        cout<<"2. Register User"<<endl;
-        cout<<"3. Exit"<<endl;
-        cout<<"Enter your choice: ";
+        cout << "1. Login" << endl;
+        cout << "2. Register User" << endl;
+        cout << "3. Exit" << endl;
+        cout << "Enter your choice: ";
         int choice;
-        cin>>choice;
+        cin >> choice;
 
         switch (choice) {
             case 1: {
                 cin.ignore();
 
-                cout<<"Username: ";
-                cin.getline(username,MAX_SIZE);
-                cout<<"Password: ";
-                cin.getline(password,MAX_SIZE);
+                cout << "Username: ";
+                cin.getline(username, MAX_SIZE);
+                cout << "Password: ";
+                cin.getline(password, MAX_SIZE);
 
-                loginUser(username,password,login);
+                loginUser(username, password, login);
                 if (!login) {
-                    loginAdmin(username,password,logInAdmin);
+                    loginAdmin(username, password, logInAdmin);
                 }
 
-                if (login==false && logInAdmin==false) {
-                    cout<<"\033[91m"<<"Wrong username or password. Try again!"<<"\033[0m"<<endl;
+                if (login == false && logInAdmin == false) {
+                    cout << "\033[91m" << "Wrong username or password. Try again!" << "\033[0m" << endl;
                 }
 
                 if (!login && !logInAdmin) {
                     break;
-                } break;
+                }
+                break;
             }
             case 2: {
                 cin.ignore();
 
-                cout<<"Username: ";
-                cin.getline(username,MAX_SIZE);
-                cout<<"Password: ";
-                cin.getline(password,MAX_SIZE);
+                cout << "Username: ";
+                cin.getline(username, MAX_SIZE);
+                cout << "Password: ";
+                cin.getline(password, MAX_SIZE);
 
                 char role[MAX_SIZE];
-                cin.getline(role,MAX_SIZE);
+                cout << "Enter your role (player or admin): ";
+                cin.getline(role, MAX_SIZE);
 
-                if (isStringEqual(role,"player")) {
+                if (isStringEqual(role, "player")) {
                     registerNewUser(username, password);
                 }
-                if (isStringEqual(role,"admin")) {
+                if (isStringEqual(role, "admin")) {
                     registerNewAdmin(username, password);
                 }
                 break;
@@ -570,74 +557,70 @@ void selectAction(char* username, char* password) {
             case 3:
                 exit(0);
             default:
-                cout<<"\033[91m"<<"Wrong choice. Please enter current choice!"<<"\033[0m"<<endl;
+                cout << "\033[91m" << "Wrong choice. Please enter current choice!" << "\033[0m" << endl;
         }
     }
 }
 
-void playerGameplay(const char* username, const char* password) {
+void playerGameplay(const char *username, const char *password) {
+    cout << "\033[95m" << "Let's the game start" << "\033[0m" << endl;
 
-    cout<<"\033[95m"<<"Let's the game start"<<"\033[0m"<<endl;
-
-    bool flag=false;
+    bool flag = false;
     trueGame(flag);
 
-    int games=0;
-    int wins=0;
+    int games = 0;
+    int wins = 0;
 
     if (isInLeaderboard(username)) {
-        games=getPlayedGames(username);
-        wins=getWins(username);
+        games = getPlayedGames(username);
+        wins = getWins(username);
     }
 
     if (flag) {
         wins++;
         games++;
-    }
-    else {
+    } else {
         games++;
     }
     leaderboardUpdate(username, games, wins);
-    cout<<"You stats: "<<wins<<"/"<<games<<endl;
+    cout << "Your stats: " << wins << "/" << games << endl;
 }
 
-void removeWord(const char* word) {
+void removeWord(const char *word) {
     ifstream file("words.txt");
 
     if (!file.is_open()) {
-        cout<<"File could not be opened"<<endl;
+        cout << "File could not be opened" << endl;
         return;
     }
 
     ofstream temp("temp.txt");
-    char line[MAX_SIZE_WORD+1];
+    char line[MAX_SIZE_WORD + 1];
 
-    while (file.getline(line,MAX_SIZE_WORD+1)) {
-        if (!isStringEqual(line,word)) {
-            temp<<line<<endl;
+    while (file.getline(line, MAX_SIZE_WORD + 1)) {
+        if (!isStringEqual(line, word)) {
+            temp << line << endl;
         }
-
     }
     file.close();
     temp.close();
 
     remove("words.txt");
-    rename("temp.txt","words.txt");
+    rename("temp.txt", "words.txt");
 }
 
-void addNewWord(const char* word) {
-    ofstream file("words.txt",ios::app);
+void addNewWord(const char *word) {
+    ofstream file("words.txt", ios::app);
 
     if (!file.is_open()) {
-        cout<<"File could not be opened"<<endl;
+        cout << "File could not be opened" << endl;
         return;
     }
 
     if (isInFile(word)) {
-        cout<<"You have already added"<<endl;
-    }
-    else {
-        file<<word<<endl;
+        cout << "You have already added" << endl;
+    } else {
+        file << word << endl;
     }
 
     file.close();
@@ -647,71 +630,73 @@ void printLeaderboard() {
     ifstream file("leaderboard.txt");
 
     if (!file.is_open()) {
-        cout<<"File could not be opened"<<endl;
+        cout << "File could not be opened" << endl;
         return;
     }
 
-    char fullData[2*MAX_SIZE+1];
+    char fullData[2 * MAX_SIZE + 1];
 
-    while (file.getline(fullData,2*MAX_SIZE+1)) {
-        cout<<"\033[93m"<<fullData<<"\033[0m"<<endl;
+    while (file.getline(fullData, 2 * MAX_SIZE + 1)) {
+        cout << "\033[93m" << fullData << "\033[0m" << endl;
     }
     file.close();
 }
 
-void adminGameplay(const char* username, const char* password) {
-    cout<<"\033[96m"<<"ADMIN MENU"<<"\033[0m"<<endl;
-    cout<<"1. Remove word"<<endl;
-    cout<<"2. Add word"<<endl;
-    cout<<"3. Leaderboard"<<endl;
+void adminGameplay(const char *username, const char *password) {
+    cout << "\033[96m" << "ADMIN MENU" << "\033[0m" << endl;
+    cout << "1. Remove word" << endl;
+    cout << "2. Add word" << endl;
+    cout << "3. Leaderboard" << endl;
 
-    int choice=0;
+    int choice = 0;
 
-    while (choice!=1 && choice!=2 && choice!=3)  {
-        cout<<"Enter your choice: ";
-        cin>>choice;
+    while (choice != 1 && choice != 2 && choice != 3) {
+        cout << "Enter your choice: ";
+        cin >> choice;
 
         switch (choice) {
             case 1: {
                 cin.ignore();
-                char wordToRemove[MAX_SIZE_WORD];
-                cin.getline(wordToRemove,MAX_SIZE_WORD);
+                char wordToRemove[MAX_SIZE_WORD + 1];
+                cin.getline(wordToRemove, MAX_SIZE_WORD + 1);
                 removeWord(wordToRemove);
-            } break;
+            }
+            break;
             case 2: {
                 cin.ignore();
                 char wordToAdd[MAX_SIZE_WORD];
-                cin.getline(wordToAdd,MAX_SIZE_WORD);
+                cin.getline(wordToAdd, MAX_SIZE_WORD + 1);
                 addNewWord(wordToAdd);
-            } break;
+            }
+            break;
             case 3: {
                 cin.ignore();
-                cout<<endl;
+                cout << endl;
                 printLeaderboard();
-            } break;
+            }
+            break;
             default: {
-                cout<<"\033[91m"<<"Wrong choice. Please enter current choice!"<<"\033[0m"<<endl;
+                cout << "\033[91m" << "Wrong choice. Please enter current choice!" << "\033[0m" << endl;
             }
         }
     }
 }
 
 int main() {
-    cout<<"\033[95m"<<"Welcome to the Wordle! Please choice: "<<"\033[0m"<<endl;
-    cout<<"-------------------------------------"<<endl;
+    cout << "\033[95m" << "Welcome to the Wordle! Please choice: " << "\033[0m" << endl;
+    cout << "-------------------------------------" << endl;
 
     char username[MAX_SIZE];
     char password[MAX_SIZE];
 
-    selectAction(username,password);
+    selectAction(username, password);
 
-    cout<<endl;
+    cout << endl;
 
     if (isInAdminList(username)) {
-        adminGameplay(username,password);
-    }
-    else {
-        playerGameplay(username,password);
+        adminGameplay(username, password);
+    } else {
+        playerGameplay(username, password);
     }
 
     return 0;
